@@ -1,14 +1,14 @@
 export const users = [
   {
-    name: 'big dick',
+    name: 'delong',
     desc: 'just a dick',
   },
   {
-    name: 'small dick',
+    name: 'lcm',
     desc: 'another dick',
   },
   {
-    name: 'm dick',
+    name: 'sajo',
     desc: 'dick?',
   }
 ]
