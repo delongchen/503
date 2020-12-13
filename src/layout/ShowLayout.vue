@@ -20,7 +20,7 @@
         <template #title>
           <div>
             <a :href="`https://${v.link}`" target="_blank"><h1 style="display: inline;">{{ v.title }}</h1></a>
-            <a-icon type="plus-square" style="padding-left: 10px"/>
+            <a-icon type="plus-square" style="padding-left: 10px" @click="addItem(k)"/>
           </div>
         </template>
         <a-card-grid
@@ -33,7 +33,10 @@
             :body-style="{ padding: 0 }">
             <a-card-meta>
               <template #title>
-                <a :href="cv.direct ? cv.link : `https://${v.link}${cv.link}`" target="_blank">
+                <a
+                  :href="cv.direct ? cv.link : `https://${v.link}${cv.link}`"
+                  @click="collectClick(cv)"
+                  target="_blank">
                   <a-icon :type="cv.icon"/>
                   <span class="cv-title">{{ cv.title }}</span>
                 </a>
@@ -57,8 +60,8 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import axios from 'axios'
+import {mapGetters, mapActions} from 'vuex'
+import ItemForm from '@/components/ItemForm'
 
 const tags = ['pink', 'red', 'orange', 'green', 'cyan', 'blue', 'purple']
 let tagId = 0
@@ -79,6 +82,7 @@ export default {
     ])
   },
   methods: {
+    ...mapActions('user', ['GetData', 'GatherClick']),
     logout() {
       this.$store.commit('user/id', null)
       this.$router.push({path: '/login'})
@@ -88,9 +92,31 @@ export default {
       return tags[tagId++]
     },
     getDataAndRefresh() {
-      axios.get('/td.json').then(value => {
-        this.config = value.data
+      this.GetData().then(value => {
+        this.config = value
       })
+    },
+    collectClick(node) {
+      const { GatherClick } = this
+      const { title, link } = node
+      const id = this.$store.state.user.id
+      GatherClick({title, link, id}).then(() => {
+        console.log('好色哦')
+      })
+    },
+    addItem(id) {
+      this.$dialog(
+        ItemForm,
+        {
+          record: { id }
+        },
+        {
+          title: '新增',
+          width: '50%',
+          centered: true,
+          maskClosable: false,
+        }
+      )
     }
   }
 }

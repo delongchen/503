@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import { VueAxios } from "@/utils/axios";
+Vue.use(VueAxios)
+
 import { router } from "@/router";
 import store from '@/store'
 

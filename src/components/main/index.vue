@@ -25,13 +25,16 @@ import {users} from "@/components/main/users";
 
 export default {
   name: "MainPage",
+  computed: {
+  },
   created() {
     this.users = users
   },
   methods: {
     handleClick(id) {
-      this.$store.commit('user/id', id)
-      this.$router.push('/503')
+      this.$store.dispatch('user/Login', id).then(() => {
+        this.$router.push({ path: '/503' })
+      })
     }
   }
 }
