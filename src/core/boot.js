@@ -6,4 +6,5 @@ import {
 
 export default function () {
   store.commit(`user/id`, storage.get(USER_ID, null))
+  store.commit('eh/updateLast', storage.get('last', null))
 }

@@ -1,16 +1,26 @@
 <template>
   <div class="wel-card"
+       @click="$router.push({path: to})"
        @mouseout="hovered = false"
        @mouseover="hovered = true">
     <div style="margin: auto; font-size: 3rem">
-      <slot/>
+      {{ title }}
     </div>
   </div>
 </template>
 
 <script>
+const REQ_STR = {
+  type: String,
+  required: true
+}
+
 export default {
   name: "WelCard",
+  props:{
+    title: REQ_STR,
+    to: REQ_STR
+  },
   data() {
     return {
       hovered: false

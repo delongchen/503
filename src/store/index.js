@@ -3,10 +3,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import user from './user'
+import eh from "./eh";
 
 const storeOpt = {
   modules: {
-    user
+    user,
+    eh
   }
 }
 

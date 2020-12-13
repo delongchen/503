@@ -1,30 +1,7 @@
-import { axios } from '@/utils/axios'
+import {createApi} from './util'
 
-const userApi = {
-  Login: '/auth/login',
-  Data: '/data',
-  Gather: '/auth/gather'
-}
+const {get, post} = createApi({prefix: '/3000'})
 
-export function login(parameter) {
-  return axios({
-    url: userApi.Login,
-    method: 'post',
-    data: parameter
-  })
-}
-
-export function getData() {
-  return axios({
-    url: userApi.Data,
-    method: 'get'
-  })
-}
-
-export function gatherClick(info) {
-  return axios({
-    url: userApi.Gather,
-    method: 'post',
-    data: info
-  })
-}
+export const login = post('/auth/login')
+export const getData = get('/data')
+export const gatherClick = post('/auth/gather')

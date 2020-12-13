@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <wel-card>eh</wel-card>
-    <wel-card>login</wel-card>
+    <wel-card title="EH" to="/eh"/>
+    <wel-card title="LOGIN" to="/login"/>
   </div>
 </template>
 
